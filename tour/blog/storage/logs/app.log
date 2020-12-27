@@ -8,3 +8,6 @@
 2020/12/22 19:26:54 {"callers":["c:/GO_Project/go-blog/tour/blog/main.go: 27 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1608636414705235200}
 2020/12/22 19:27:53 {"callers":["c:/GO_Project/go-blog/tour/blog/main.go: 27 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1608636473910823100}
 2020/12/22 19:29:48 {"callers":["c:/GO_Project/go-blog/tour/blog/main.go: 27 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1608636588108298800}
+2020/12/27 20:53:21 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1609073601979085000}
+2020/12/27 20:55:27 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1609073727581970000}
+2020/12/27 20:57:55 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1609073875977273000}
