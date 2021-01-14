@@ -30,6 +30,10 @@ func init() {
 		log.Fatalf("init.setupLogger err: %v", err)
 	}
 }
+// @title 博客系统
+// @version 1.0
+// @description Go Language travel
+// @termsOfService https://github.com
 func main() {
 	gin.SetMode(global.ServerSetting.RunMode)
 	router := routers.NewRouter()

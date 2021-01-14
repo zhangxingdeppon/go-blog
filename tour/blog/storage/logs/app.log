@@ -11,3 +11,8 @@
 2020/12/27 20:53:21 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1609073601979085000}
 2020/12/27 20:55:27 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1609073727581970000}
 2020/12/27 20:57:55 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1609073875977273000}
+2021/01/09 22:59:08 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1610204348559584000}
+2021/01/10 19:02:42 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1610276562326724000}
+2021/01/10 19:07:31 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"fatal","message":"app.BindAndValid errs: State必须是[0 1]中的一个","time":1610276851353113000}
+2021/01/10 19:17:33 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1610277453628515000}
+2021/01/10 19:17:34 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"fatal","message":"app.BindAndValid errs: Name为必填字段","time":1610277454716310000}

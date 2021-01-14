@@ -1,0 +1,197 @@
+definitions:
+  errorcode.Error:
+    properties:
+      code:
+        type: integer
+      details:
+        items:
+          type: string
+        type: array
+      msg:
+        type: string
+    type: object
+  model.Tag:
+    properties:
+      create_on:
+        type: integer
+      created_by:
+        type: string
+      deleted_on:
+        type: integer
+      id:
+        type: integer
+      is_del:
+        type: integer
+      modified_by:
+        type: integer
+      modified_on:
+        type: integer
+      name:
+        type: string
+      state:
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: Go Language travel
+  license: {}
+  termsOfService: https://github.com
+  title: 博客系统
+  version: "1.0"
+paths:
+  /api/v1/tags:
+    get:
+      parameters:
+      - description: label name
+        in: query
+        maxLength: 100
+        name: name
+        type: string
+      - default: 1
+        description: status
+        enum:
+        - 0
+        - 1
+        in: query
+        name: state
+        type: integer
+      - description: page code
+        in: query
+        name: page
+        type: integer
+      - description: 每页数量
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/model.Tag'
+        "400":
+          description: 请求错误
+          schema:
+            $ref: '#/definitions/errorcode.Error'
+        "500":
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/errorcode.Error'
+      summary: Get Multi lable
+    post:
+      parameters:
+      - description: label name
+        in: body
+        maxLength: 100
+        minLength: 3
+        name: name
+        required: true
+        schema:
+          type: string
+      - default: 1
+        description: status
+        enum:
+        - 0
+        - 1
+        in: body
+        name: state
+        schema:
+          type: integer
+      - description: 创建者
+        in: body
+        maxLength: 100
+        minLength: 3
+        name: create_by
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/model.Tag'
+        "400":
+          description: 请求错误
+          schema:
+            $ref: '#/definitions/errorcode.Error'
+        "500":
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/errorcode.Error'
+      summary: create lable
+  /api/v1/tags/{id}:
+    delete:
+      parameters:
+      - description: 标签ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/model.Tag'
+        "400":
+          description: 请求错误
+          schema:
+            $ref: '#/definitions/errorcode.Error'
+        "500":
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/errorcode.Error'
+      summary: delete  lable
+    put:
+      parameters:
+      - description: 标签ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: label name
+        in: body
+        maxLength: 100
+        minLength: 3
+        name: name
+        required: true
+        schema:
+          type: string
+      - default: 1
+        description: status
+        enum:
+        - 0
+        - 1
+        in: body
+        name: state
+        schema:
+          type: integer
+      - description: 修改者
+        in: body
+        maxLength: 100
+        minLength: 3
+        name: modified_by
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功
+          schema:
+            $ref: '#/definitions/model.Tag'
+        "400":
+          description: 请求错误
+          schema:
+            $ref: '#/definitions/errorcode.Error'
+        "500":
+          description: 内部错误
+          schema:
+            $ref: '#/definitions/errorcode.Error'
+      summary: update lable
+swagger: "2.0"
