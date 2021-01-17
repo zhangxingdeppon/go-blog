@@ -1,10 +1,13 @@
 package v1
 
 import (
+	"blog/internal/service"
 	"blog/global"
 	"github.com/gin-gonic/gin"
 "blog/pkg/app"
 "blog/pkg/errorcode"
+"blog/pkg/convert"
+
 )
 
 type Tag struct{}
@@ -27,10 +30,11 @@ func (t Tag) Get(c *gin.Context) {
 // @Failure 500 {object} errorcode.Error "内部错误"
 // @Router /api/v1/tags [get]
 func (t Tag) List(c *gin.Context) {
-param := struct {
-	Name string `form:"name" binding:"max=100"`
-    State uint8 `form:"state, default=1" binding:"oneof=0 1"`
-}{}
+// param := struct {
+// 	Name string `form:"name" binding:"max=100"`
+//     State uint8 `form:"state, default=1" binding:"oneof=0 1"`
+// }{}
+param := service.TagListRequest{}
 response := app.NewResponse(c)
 valid,errs:=app.BindAndValid(c, &param)
 if !valid {
@@ -39,7 +43,24 @@ if !valid {
 	response.ToErrorResponse(errRsp)
 	return
 }
-response.ToResponse(gin.H{})
+svc := service.New(c.Request.Context())
+pager := app.Pager{Page: app.GetPage(c), PageSize: app.GetPageSize(c)}
+totalRows, err := svc.CountTag(&service.CountTagRequest{Name: param.Name, State: param.State}) 
+
+if err != nil {
+	global.Logger.Fatalf("svc.CountTag err: %v", err)
+	response.ToErrorResponse(errorcode.ErrorCountTagFail)
+	return
+}
+
+tags, err := svc.GetTagList(&param, &pager)
+if err != nil {
+	global.Logger.Fatalf("svc.GetTagList err: %v", err)
+	response.ToErrorResponse(errorcode.ErrorGetTagListFail)
+	return
+}
+// response.ToResponse(gin.H{})
+response.ToResponseList(tags, totalRows)
 return
 
 }
@@ -53,7 +74,24 @@ return
 // @Failure 500 {object} errorcode.Error "内部错误"
 // @Router /api/v1/tags [post]
 func (t Tag) Create(c *gin.Context) {
-
+param := service.CreateTagRequest{}
+response := app.NewResponse(c)
+valid,errs:=app.BindAndValid(c, &param)
+if !valid {
+	global.Logger.Fatalf("app.BindAndValid errs: %v", errs)
+	errRsp := errorcode.InvalidParams.WithDetails(errs.Errors()...)
+	response.ToErrorResponse(errRsp)
+	return
+}
+svc := service.New(c.Request.Context())
+err := svc.CreateTag(&param)
+if err != nil {
+	global.Logger.Fatalf("svc.CreateTag err: %v", err)
+	response.ToErrorResponse(errorcode.ErrorCreateTagFail)
+	return
+}
+response.ToResponse(gin.H{})
+return
 }
 // @Summary update lable
 // @Produce json
@@ -66,7 +104,26 @@ func (t Tag) Create(c *gin.Context) {
 // @Failure 500 {object} errorcode.Error "内部错误"
 // @Router /api/v1/tags/{id} [put]
 func (t Tag) Update(c *gin.Context) {
-
+	param := service.UpdateTagRequest{
+		ID: convert.StrTo(c.Param("id")).MustUInt32(),
+	}
+	response := app.NewResponse(c)
+	valid, errs := app.BindAndValid(c, &param)
+	if !valid {
+		global.Logger.Fatalf("app.BindAndValid errs: %v", errs)
+		errRsp := errorcode.InvalidParams.WithDetails(errs.Errors()...)
+		response.ToErrorResponse(errRsp)
+		return
+	}
+	svc := service.New(c.Request.Context())
+	err := svc.UpdateTag(&param)
+	if err != nil {
+		global.Logger.Fatalf("svc.UpdateTag err: %v", err)
+		response.ToErrorResponse(errorcode.ErrorUpdateFail)
+		return
+	}
+	response.ToResponse(gin.H{})
+	return
 }
 // @Summary delete  lable
 // @Produce json
@@ -76,5 +133,24 @@ func (t Tag) Update(c *gin.Context) {
 // @Failure 500 {object} errorcode.Error "内部错误"
 // @Router /api/v1/tags/{id} [delete]
 func (t Tag) Delete(c *gin.Context) {
-
+	param := service.DeleteTagRequest{
+		ID: convert.StrTo(c.Param("id")).MustUInt32(),
+	}
+	response := app.NewResponse(c)
+	valid, errs := app.BindAndValid(c, &param)
+	if !valid {
+		global.Logger.Fatalf("app.BindAndValid errs: %v", errs)
+		errRsp := errorcode.InvalidParams.WithDetails(errs.Errors()...)
+		response.ToErrorResponse(errRsp)
+		return
+	}
+	svc := service.New(c.Request.Context())
+	err := svc.DeleteTag(&param)
+	if err != nil {
+		global.Logger.Fatalf("svc.DeleteTag err: %v", err)
+		response.ToErrorResponse(errorcode.ErrorDeletedTagFail)
+		return
+	}
+	response.ToResponse(gin.H{})
+	return
 }

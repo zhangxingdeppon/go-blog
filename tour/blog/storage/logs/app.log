@@ -16,3 +16,10 @@
 2021/01/10 19:07:31 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"fatal","message":"app.BindAndValid errs: State必须是[0 1]中的一个","time":1610276851353113000}
 2021/01/10 19:17:33 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1610277453628515000}
 2021/01/10 19:17:34 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"fatal","message":"app.BindAndValid errs: Name为必填字段","time":1610277454716310000}
+2021/01/17 17:16:46 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1610875006865405000}
+2021/01/17 17:20:27 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1610875227032013000}
+2021/01/17 17:21:56 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1610875316326147000}
+2021/01/17 17:22:00 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"fatal","message":"app.BindAndValid errs: Name长度必须至少为3个字符","time":1610875320663923000}
+2021/01/17 17:22:21 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"info","message":"bryan: go-programming-tour-book/blog","time":1610875341623551000}
+2021/01/17 17:22:30 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"fatal","message":"svc.CreateTag err: Error 1054: Unknown column 'modified_on' in 'field list'","time":1610875350987099000}
+2021/01/17 17:25:07 {"callers":["/Users/youjia/go-programming-tour-book/go-blog/tour/blog/main.go: 28 main.init.0"],"level":"fatal","message":"svc.CreateTag err: Error 1054: Unknown column 'modified_on' in 'field list'","time":1610875507595644000}
