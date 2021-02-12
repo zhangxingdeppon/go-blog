@@ -1,6 +1,7 @@
 package main
 
 import (
+	"blog/pkg/tracer"
 	"blog/global"
 	"blog/internal/model"
 	"blog/internal/routers"
@@ -28,6 +29,11 @@ func init() {
 	err = setupLogger()
 	if err != nil {
 		log.Fatalf("init.setupLogger err: %v", err)
+	}
+
+	err = setupTracer()
+	if err != nil {
+		log.Fatalf("init.setupTracer err: %v", err)
 	}
 }
 // @title 博客系统
@@ -66,6 +72,11 @@ func setupSetting() error {
 	if err != nil {
 		return err
 	}
+	err = setting.ReadSection("JWT", &global.JWTSetting)
+	if err != nil {
+		return err
+	}
+	global.JWTSetting.Expire *= time.Second
 	global.ServerSetting.ReadTimeout *= time.Second
 	global.ServerSetting.WriteTimeout *= time.Second
 	return nil
@@ -88,4 +99,15 @@ func setupLogger() error {
 		MaxAge:    10,
 		LocalTime: true}, "", log.LstdFlags).WithCaller(2)
 	return nil
+}
+func setupTracer() error {
+     jaegerTracer, _, err := tracer.NewJaegerTracer(
+		 "blog-service",
+		 "192.168.0.107:6831",
+	 )
+	 if err != nil {
+		 return  err
+	 }
+	 global.Tracer = jaegerTracer
+	 return nil	
 }

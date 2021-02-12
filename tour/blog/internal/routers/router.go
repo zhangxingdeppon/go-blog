@@ -1,24 +1,34 @@
 package routers
 
 import (
+	"blog/global"
+	//"blog/pkg/upload"
 	v1 "blog/internal/routers/api/v1"
+	"blog/internal/routers/api"
 	_ "blog/docs"
 ginSwagger "github.com/swaggo/gin-swagger"
 "github.com/swaggo/gin-swagger/swaggerFiles"
 	"github.com/gin-gonic/gin"
 	"blog/internal/middleware"
+	"net/http"
+	
 )
 
 func NewRouter() *gin.Engine {
 	r := gin.New()
-
+    r.Use(middleware.Tracing())
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 	r.Use(middleware.Translations())
-r.GET("/swagger/*any",ginSwagger.WrapHandler(swaggerFiles.Handler))
+    r.GET("/swagger/*any",ginSwagger.WrapHandler(swaggerFiles.Handler))
 	article := v1.NewArticle()
 	tag := v1.NewTag()
+	upload := NewUpload()
+	r.POST("/upload/file", upload.UploadFile)
+	r.StaticFS("/static", http.Dir(global.AppSetting.UploadSavePath))
+    r.GET("/auth", api.GetAuth)
 	apiv1 := r.Group("/api/v1")
+	apiv1.Use(middleware.JWT())
 	{
 		// 创建标签
 		apiv1.POST("/tags", tag.Create)
